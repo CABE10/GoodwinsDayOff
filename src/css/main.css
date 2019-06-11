@@ -9,4 +9,5 @@ html, body {
 
 canvas {
 	-webkit-tap-highlight-color: transparent;
+	background-color: rgb(110, 72, 72);
 }
