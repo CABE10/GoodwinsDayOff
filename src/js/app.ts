@@ -12,7 +12,8 @@ class App {
 
 	public setup(): void {
 		// Any setup that is required that only runs once before game loads goes here
-		document.addEventListener('keydown', this.keyboardInput);
+		document.addEventListener('keydown', (e) => {this.keyboardInput(e, "keydown")});
+		document.addEventListener('keyup', (e) => {this.keyboardInput(e, "keyup")});
 		this.gameLoop();
 	}
 
@@ -22,22 +23,26 @@ class App {
 		this._game.render();
 	}
 
-	private keyboardInput(event: KeyboardEvent) {
+	private keyboardInput(event: KeyboardEvent, type: string) {
 		// PRESS LEFT ARROW OR 'A' KEY
 		if (event.keyCode == 37 || event.keyCode == 65) {
-		   console.log("LEFT ARROW OR 'A' KEY");
+		   console.log("[🠘] " + type);
 		}
 		// PRESS UP ARROW OR 'W' KEY
 		else if (event.keyCode == 38 || event.keyCode == 87) {
-			console.log("UP ARROW OR 'W' KEY");
+			console.log("[🠙] " + type);
 		}
 		// PRESS RIGHT ARROW OR 'D' KEY
 		else if (event.keyCode == 39 || event.keyCode == 68 ) {
-			console.log("RIGHT ARROW OR 'D' KEY");
+			console.log("[🠚] " + type);
 		}
 		// PRESS DOWN ARROW OR 'S' KEY
 		else if (event.keyCode == 40 || event.keyCode == 83 ) {
-			console.log("DOWN ARROW OR 'S' KEY");
+			console.log("[🠛] " + type);
+		}
+		// PRESS SPACE BAR
+		else if (event.keyCode == 32) {
+			console.log("[_] " + type);
 		}
 	 }
 }
