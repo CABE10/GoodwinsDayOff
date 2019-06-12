@@ -12,7 +12,6 @@ class App {
 
 	public setup(): void {
 		// Any setup that is required that only runs once before game loads goes here
-		this._game.setup();
 		this.gameLoop();
 	}
 
