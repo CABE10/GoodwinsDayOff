@@ -10,4 +10,5 @@ html, body {
 canvas {
 	-webkit-tap-highlight-color: transparent;
 	background-color: rgb(0, 0, 0);
+	/*cursor: none;*/
 }
