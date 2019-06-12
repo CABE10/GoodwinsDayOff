@@ -17,7 +17,8 @@ export default class Game {
 	}
 
 	public render(): void {
-		this.ctx.clearRect(0, 0, this.width, this.height);//clear old rendered content
+		//this.ctx.clearRect(0, 0, this.width, this.height);//clear old rendered content globally
+		this.ctx.clearRect(this.width - 130, 0, this.width, 80);//clear old rendered content locally
 		this.calcFps();
 	}
 
@@ -34,8 +35,9 @@ export default class Game {
 
 	private showFPS(){
 		this.ctx.fillStyle = "White";
-        this.ctx.font      = "normal 20pt Consolas";
-        this.ctx.fillText(this.fps.toFixed(0) + " fps", this.width - 110, 40);
+		this.ctx.font      = "normal 20pt Consolas";
+		this.ctx.textAlign = "right";
+        this.ctx.fillText(this.fps.toFixed(0) + " fps", this.width - 30, 40);
 	}
 
 	public setup(){
