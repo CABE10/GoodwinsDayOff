@@ -30,4 +30,20 @@ export default class Input {
 			console.log("[_] " + event.type);
 		}
 	}
+
+	public setCursor(){
+		let canvas = document.createElement("canvas");
+		canvas.width = 30;
+		canvas.height = 30;
+		let ctx = canvas.getContext("2d");
+		ctx.fillStyle = "#000000";
+		ctx.font = "30px FontAwesome";
+		ctx.fillStyle = "White";
+		ctx.textAlign = "center";
+		ctx.textBaseline = "middle";
+		ctx.fillText("\uf05b", 12, 12);
+		let dataURL = canvas.toDataURL('image/png');
+		document.body.style.cursor = 'url(' + dataURL + '), auto';
+		//console.log('url(' + dataURL + '), auto');
+	}
 }

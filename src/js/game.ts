@@ -19,6 +19,7 @@ export default class Game {
 		document.addEventListener('keyup', this.input.keyboardInput);
 		document.addEventListener("mousedown", this.input.mouseInput, false);
 		this.fps = new FPS(this.ctx, this.width - 30, 40);
+		this.input.setCursor();
 	}
 
 	public render(): void {
