@@ -8,6 +8,15 @@ export default class Game {
 	private fps: FPS;
 	private input: Input;
 
+	// resources: 
+	// https://opengameart.org/content/platformer-sprites
+	// https://opengameart.org/content/classic-hero
+	// https://opengameart.org/content/micro-character-bases-basics
+	//
+	// algorithms: (npm)
+	// https://www.npmjs.com/package/astar-typescript
+	// https://www.npmjs.com/package/random-dungeon-generator
+
 	constructor() {
 		this.canvas = <HTMLCanvasElement>document.getElementById('canvas');
 		this.canvas.width = this.width;
