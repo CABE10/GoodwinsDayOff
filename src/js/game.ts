@@ -28,7 +28,8 @@ export default class Game {
 		this.input = new Input();
 		document.addEventListener('keydown', this.input.keyboardInput);
 		document.addEventListener('keyup', this.input.keyboardInput);
-		document.addEventListener("mousedown", this.input.mouseInput, false);
+		document.addEventListener("mousedown", this.input.mouseInput, true);
+
 		this.fps = new FPS(this.ctx, this.width - 30, 40);
 		this.input.setCursor();
 		this.map = new Map(this.ctx).genMap();
@@ -39,5 +40,7 @@ export default class Game {
 		this.fps.clearFps();
 		this.fps.calcFps();
 		this.map.displayMap();
+		this.map.colorTile(this.input.ClickCodes);
+		console.log("outer", this.input.ClickCodes);
 	}
 }

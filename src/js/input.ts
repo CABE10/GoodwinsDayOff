@@ -1,33 +1,42 @@
-export default class Input {
+export class Input {
+
+    public KeyCodes:Array<number>;
+    public ClickCodes:Array<number>;
 
 	public mouseInput(event: MouseEvent){
-		let x: number = event.x;
-		let y: number = event.y;
-	 
-		console.log('x:' + x + ' y:' + y + ", " + event.type);
+        let x = event.x;
+        let y = event.y;
+        this.ClickCodes = x !== undefined ? [x, y] : this.ClickCodes;
+        console.log('x:' + event.x + ' y:' + event.y + ", " + event.type);
+        console.log("inner", this.ClickCodes);
 	}
 
 	//something to test: while event.repeat == true/false
 	public keyboardInput(event: KeyboardEvent) {
 		// PRESS LEFT ARROW OR 'A' KEY
-		if (event.keyCode == 37 || event.keyCode == 65) {
-		   console.log("[🠘] " + event.type);
+		if (Input.LEFT.indexOf(event.keyCode) !== -1) {
+           console.log("[🠘] " + event.type);
+           this.KeyCodes.push(event.keyCode);
 		}
 		// PRESS UP ARROW OR 'W' KEY
-		else if (event.keyCode == 38 || event.keyCode == 87) {
+		if (Input.UP.indexOf(event.keyCode) !== -1) {
 			console.log("[🠙] " + event.type);
+            this.KeyCodes.push(event.keyCode);
 		}
 		// PRESS RIGHT ARROW OR 'D' KEY
-		else if (event.keyCode == 39 || event.keyCode == 68 ) {
+		if (Input.RIGHT.indexOf(event.keyCode) !== -1) {
 			console.log("[🠚] " + event.type);
+            this.KeyCodes.push(event.keyCode);
 		}
 		// PRESS DOWN ARROW OR 'S' KEY
-		else if (event.keyCode == 40 || event.keyCode == 83 ) {
+		if (Input.DOWN.indexOf(event.keyCode) !== -1) {
 			console.log("[🠛] " + event.type);
+            this.KeyCodes.push(event.keyCode);
 		}
 		// PRESS SPACE BAR
-		else if (event.keyCode == 32) {
+		if (event.keyCode == Input.SPACE) {
 			console.log("[_] " + event.type);
+            this.KeyCodes.push(event.keyCode);
 		}
 	}
 
@@ -44,6 +53,15 @@ export default class Input {
 		ctx.fillText("\uf05b", 12, 12);
 		let dataURL = canvas.toDataURL('image/png');
 		document.body.style.cursor = 'url(' + dataURL + '), auto';
-		//console.log('url(' + dataURL + '), auto');
 	}
 }
+
+export namespace Input {
+    export const LEFT:Array<number>  = [37, 65];
+    export const UP:Array<number>    = [38, 87];
+    export const RIGHT:Array<number> = [39, 68];
+    export const DOWN:Array<number>  = [40, 83];
+    export const SPACE:number  = 32;
+}
+
+export default Input;

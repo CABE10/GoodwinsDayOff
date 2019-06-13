@@ -5,11 +5,13 @@ export default class Map {
     private dungeon: Array<Array<number>>;
     private tileSize: number;
     private mapTileSize: number;
+    public showMiniMap: boolean;
 
-	constructor(context:CanvasRenderingContext2D, tileSize:number = 64, mapTileSize:number = 6) {
+	constructor(context:CanvasRenderingContext2D, tileSize:number = 64, mapTileSize:number = 6, showMiniMap:boolean = true) {
         this.ctx = context;
         this.tileSize = tileSize;
         this.mapTileSize = mapTileSize;
+        this.showMiniMap = showMiniMap;
 	}
 
 	public genMap(): Map { //example map - can replace with npm lib: https://www.npmjs.com/package/random-dungeon-generator
@@ -52,10 +54,17 @@ export default class Map {
 			this.ctx.fillRect(i*this.tileSize, index*this.tileSize, this.tileSize, this.tileSize);
 		}));
 
-		//small one
-		this.dungeon.forEach((arr, index) => arr.forEach((x, i) => {
-			this.ctx.fillStyle = `rgb(${x*10},${x*30},${x*30}, .5)`;
-			this.ctx.fillRect(i*this.mapTileSize, index*this.mapTileSize, this.mapTileSize, this.mapTileSize);
-		}));
-	}
+        //small one
+        if (this.showMiniMap)
+            this.dungeon.forEach((arr, index) => arr.forEach((x, i) => {
+                this.ctx.fillStyle = `rgb(${x*10},${x*30},${x*30}, .5)`;
+                this.ctx.fillRect(i*this.mapTileSize, index*this.mapTileSize, this.mapTileSize, this.mapTileSize);
+            }));
+    }
+    
+    public colorTile(clickCoords: number[]):void {
+        
+        this.ctx.fillStyle = `rgb(200, 0, 0, .5)`;
+        this.ctx.fillRect(4*this.tileSize, 2*this.tileSize, this.tileSize, this.tileSize);
+    }
 }
