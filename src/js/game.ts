@@ -1,5 +1,6 @@
 import FPS from './fps';
 import Input from './input';
+import Map from './map';
 export default class Game {
 	private canvas: HTMLCanvasElement;
 	private ctx: CanvasRenderingContext2D;
@@ -7,6 +8,7 @@ export default class Game {
 	private width: number = window.innerWidth;
 	private fps: FPS;
 	private input: Input;
+	private map: Map;
 
 	// resources: 
 	// https://opengameart.org/content/platformer-sprites
@@ -29,11 +31,13 @@ export default class Game {
 		document.addEventListener("mousedown", this.input.mouseInput, false);
 		this.fps = new FPS(this.ctx, this.width - 30, 40);
 		this.input.setCursor();
+		this.map = new Map(this.ctx).genMap();
 	}
 
 	public render(): void {
-		//this.ctx.clearRect(0, 0, this.width, this.height);//clear old rendered content globally
+		this.ctx.clearRect(0, 0, this.width, this.height);//clear old rendered content globally
 		this.fps.clearFps();
 		this.fps.calcFps();
+		this.map.displayMap();
 	}
 }
