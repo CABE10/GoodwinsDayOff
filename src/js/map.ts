@@ -77,8 +77,7 @@ export default class Map {
     public colorTile(input: Input):void {
         //showing that all input can be passed now
         if (input.KeyCodes !== undefined && input.KeyCodes.length > 0){
-            console.log(input.KeyCodes);
-            if (input.KeyCodes.find((el)=>{ return el.key === Input.Type.SPACE && el.type === Input.KeyboardEvent.KEYUP})){
+            if (input.KeyCodes.find((el)=>{ return el.key === Input.Type.KEY_M && el.type === Input.KeyboardEvent.KEYUP})){
                 this.showMiniMap = !this.showMiniMap;//toggle minimap with space bar
                 console.log(input.KeyCodes, this.showMiniMap);
             }
