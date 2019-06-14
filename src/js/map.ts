@@ -1,4 +1,4 @@
-import { ClickCodes } from "./input";
+import { Input } from "./input";
 
 export default class Map {
 	private ctx: CanvasRenderingContext2D;
@@ -68,15 +68,19 @@ export default class Map {
             }));
     }
     
-    public colorTile(clickCoords: ClickCodes):void {
-        console.log(clickCoords);
-        this.ctx.fillStyle = `rgb(200, 0, 0, .5)`;
-        this.ctx.fillRect(clickCoords.X - clickCoords.X % this.tileSize, clickCoords.Y - clickCoords.Y % this.tileSize, this.tileSize, this.tileSize);
+    public colorTile(input: Input):void {
+        //showing that all input can be passed now
+        if (input.KeyCodes !== undefined && input.KeyCodes.length > 0)
+            console.log(`${input.KeyCodes}`);
+            
+        input.KeyCodes = [];
+        this.ctx.fillStyle = `rgb(200, 0, 0, .5)`;//red
+        this.ctx.fillRect(input.ClickCoords.X - input.ClickCoords.X % this.tileSize, input.ClickCoords.Y - input.ClickCoords.Y % this.tileSize, this.tileSize, this.tileSize);
         
         if (this.showMiniMap)
             this.ctx.fillRect(
-                ((clickCoords.X - clickCoords.X % this.tileSize) / this.tileSize) * this.mapTileSize + this.miniMapOffset[0],
-                ((clickCoords.Y - clickCoords.Y % this.tileSize) / this.tileSize) * this.mapTileSize + this.miniMapOffset[1],
+                ((input.ClickCoords.X - input.ClickCoords.X % this.tileSize) / this.tileSize) * this.mapTileSize + this.miniMapOffset[0],
+                ((input.ClickCoords.Y - input.ClickCoords.Y % this.tileSize) / this.tileSize) * this.mapTileSize + this.miniMapOffset[1],
                  this.mapTileSize, this.mapTileSize);
     }
 }

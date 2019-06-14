@@ -26,8 +26,8 @@ export default class Game {
 		this.ctx = this.canvas.getContext("2d");
 
 		this.input = new Input();
-		document.addEventListener('keydown', this.input.keyboardInput);
-		document.addEventListener('keyup', this.input.keyboardInput);
+		document.addEventListener('keydown', (e) => {this.input.keyboardInput(e, this.input)});
+		document.addEventListener('keyup', (e) => {this.input.keyboardInput(e, this.input)});
 		document.addEventListener("mousedown", (e) => {this.input.mouseInput(e, this.input)}, true);
 
 		this.fps = new FPS(this.ctx, this.width - 30, 40);
@@ -40,6 +40,6 @@ export default class Game {
 		this.fps.clearFps();
 		this.fps.calcFps();
 		this.map.displayMap();
-		this.map.colorTile(this.input.ClickCoords);
+		this.map.colorTile(this.input);
 	}
 }

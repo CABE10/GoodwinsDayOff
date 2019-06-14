@@ -5,42 +5,41 @@ export class Input {
 
     constructor(){
         this.ClickCoords = new ClickCodes();
-        var that = this;
+        this.KeyCodes = new Array<number>();
     }
 
 	public mouseInput(event: MouseEvent, that:Input){
         that.ClickCoords.X = event !== null? event.x || 0 : 0;
         that.ClickCoords.Y = event !== null? event.y || 0 : 0;
         console.log('x:' + event.x + ' y:' + event.y + ", " + event.type);
-        console.log("inner", that.ClickCoords);
 	}
 
 	//something to test: while event.repeat == true/false
-	public keyboardInput(event: KeyboardEvent) {
+	public keyboardInput(event: KeyboardEvent, that:Input) {
 		// PRESS LEFT ARROW OR 'A' KEY
 		if (Input.LEFT.indexOf(event.keyCode) !== -1) {
            console.log("[🠘] " + event.type);
-           this.KeyCodes.push(event.keyCode);
+           that.KeyCodes.push(event.keyCode);
 		}
 		// PRESS UP ARROW OR 'W' KEY
 		if (Input.UP.indexOf(event.keyCode) !== -1) {
 			console.log("[🠙] " + event.type);
-            this.KeyCodes.push(event.keyCode);
+            that.KeyCodes.push(event.keyCode);
 		}
 		// PRESS RIGHT ARROW OR 'D' KEY
 		if (Input.RIGHT.indexOf(event.keyCode) !== -1) {
 			console.log("[🠚] " + event.type);
-            this.KeyCodes.push(event.keyCode);
+            that.KeyCodes.push(event.keyCode);
 		}
 		// PRESS DOWN ARROW OR 'S' KEY
 		if (Input.DOWN.indexOf(event.keyCode) !== -1) {
 			console.log("[🠛] " + event.type);
-            this.KeyCodes.push(event.keyCode);
+            that.KeyCodes.push(event.keyCode);
 		}
 		// PRESS SPACE BAR
 		if (event.keyCode == Input.SPACE) {
 			console.log("[_] " + event.type);
-            this.KeyCodes.push(event.keyCode);
+            that.KeyCodes.push(event.keyCode);
 		}
 	}
 
