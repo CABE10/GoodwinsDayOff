@@ -1,6 +1,16 @@
 declare var require: any;
 require('../css/main.css');
 
+/////////including images///////////////
+function importAll(r:any) {
+	let imgs:any = {};
+	r.keys().map((item: string, index:number) => { imgs[item.replace('./', '')] = r(item); });
+	return imgs;
+  }
+  
+const images: object = importAll(require.context('../assets/imgs', false, /\.(png|jpe?g|svg)$/));
+////////////////////////////////////////
+
 import Game from './game';
 
 class App {
@@ -23,7 +33,7 @@ class App {
 }
 
 window.onload = () => {
-	let app = new App(new Game());
+	let app = new App(new Game(images));
 
 	app.setup();
 }

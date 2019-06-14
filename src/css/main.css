@@ -5,13 +5,9 @@ html, body {
 	height: 100%;
 	margin: 0px;
 	padding: 0px;
-
-	/*set cursor*/
-	
 }
 
 canvas {
 	-webkit-tap-highlight-color: transparent;
 	background-color: rgb(0, 0, 0);
-	/*cursor: none;*/
 }
