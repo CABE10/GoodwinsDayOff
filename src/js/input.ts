@@ -41,7 +41,7 @@ export class Input {
 			console.log("[_] " + event.type);
             that.KeyCodes.push({key:Input.Type.SPACE, type:(<any>Input.KeyboardEvent)[event.type.toUpperCase()]});
 		}
-		// PRESS SPACE BAR
+		// PRESS 'M' KEY
 		if (event.keyCode == 77) {
 			console.log("[m] " + event.type);
             that.KeyCodes.push({key:Input.Type.KEY_M, type:(<any>Input.KeyboardEvent)[event.type.toUpperCase()]});
