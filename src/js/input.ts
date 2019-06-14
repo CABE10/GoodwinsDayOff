@@ -1,14 +1,18 @@
 export class Input {
 
     public KeyCodes:Array<number>;
-    public ClickCodes:Array<number>;
+    public ClickCoords:ClickCodes;
 
-	public mouseInput(event: MouseEvent){
-        let x = event.x;
-        let y = event.y;
-        this.ClickCodes = x !== undefined ? [x, y] : this.ClickCodes;
+    constructor(){
+        this.ClickCoords = new ClickCodes();
+        var that = this;
+    }
+
+	public mouseInput(event: MouseEvent, that:Input){
+        that.ClickCoords.X = event !== null? event.x || 0 : 0;
+        that.ClickCoords.Y = event !== null? event.y || 0 : 0;
         console.log('x:' + event.x + ' y:' + event.y + ", " + event.type);
-        console.log("inner", this.ClickCodes);
+        console.log("inner", that.ClickCoords);
 	}
 
 	//something to test: while event.repeat == true/false
@@ -62,6 +66,15 @@ export namespace Input {
     export const RIGHT:Array<number> = [39, 68];
     export const DOWN:Array<number>  = [40, 83];
     export const SPACE:number  = 32;
+}
+
+export class ClickCodes{
+    public X:number;
+    public Y:number;
+    constructor(x:number = 0, y:number = 0) { 
+        this.X = x;
+        this.Y = y;
+    }
 }
 
 export default Input;

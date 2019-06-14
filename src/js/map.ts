@@ -1,3 +1,5 @@
+import { ClickCodes } from "./input";
+
 export default class Map {
 	private ctx: CanvasRenderingContext2D;
 	private height: number;//use for npm lib
@@ -6,12 +8,14 @@ export default class Map {
     private tileSize: number;
     private mapTileSize: number;
     public showMiniMap: boolean;
+    public miniMapOffset:number[];
 
-	constructor(context:CanvasRenderingContext2D, tileSize:number = 64, mapTileSize:number = 6, showMiniMap:boolean = true) {
+	constructor(context:CanvasRenderingContext2D, tileSize:number = 64, mapTileSize:number = 6, showMiniMap:boolean = true, miniMapOffset:number[] = [100,100]) {
         this.ctx = context;
         this.tileSize = tileSize;
         this.mapTileSize = mapTileSize;
         this.showMiniMap = showMiniMap;
+        this.miniMapOffset = miniMapOffset;
 	}
 
 	public genMap(): Map { //example map - can replace with npm lib: https://www.npmjs.com/package/random-dungeon-generator
@@ -58,13 +62,19 @@ export default class Map {
         if (this.showMiniMap)
             this.dungeon.forEach((arr, index) => arr.forEach((x, i) => {
                 this.ctx.fillStyle = `rgb(${x*10},${x*30},${x*30}, .5)`;
-                this.ctx.fillRect(i*this.mapTileSize, index*this.mapTileSize, this.mapTileSize, this.mapTileSize);
+                this.ctx.fillRect(i*this.mapTileSize + this.miniMapOffset[0], index*this.mapTileSize + this.miniMapOffset[1], this.mapTileSize, this.mapTileSize);
             }));
     }
     
-    public colorTile(clickCoords: number[]):void {
-        
+    public colorTile(clickCoords: ClickCodes):void {
+        console.log(clickCoords);
         this.ctx.fillStyle = `rgb(200, 0, 0, .5)`;
-        this.ctx.fillRect(4*this.tileSize, 2*this.tileSize, this.tileSize, this.tileSize);
+        this.ctx.fillRect(clickCoords.X - clickCoords.X % this.tileSize, clickCoords.Y - clickCoords.Y % this.tileSize, this.tileSize, this.tileSize);
+        
+        if (this.showMiniMap)
+            this.ctx.fillRect(
+                ((clickCoords.X - clickCoords.X % this.tileSize) / this.tileSize) * this.mapTileSize + this.miniMapOffset[0],
+                ((clickCoords.Y - clickCoords.Y % this.tileSize) / this.tileSize) * this.mapTileSize + this.miniMapOffset[1],
+                 this.mapTileSize, this.mapTileSize);
     }
 }
