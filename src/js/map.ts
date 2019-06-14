@@ -54,14 +54,16 @@ export default class Map {
 
 		//big one
 		this.dungeon.forEach((arr, index) => arr.forEach((x, i) => {
-			this.ctx.fillStyle = `rgb(${x*30},${x*30},${x*30}, .5)`;
+            //this.ctx.fillStyle = `rgb(${x*30},${x*30},${x*30}, .5)`; //by number
+			this.ctx.fillStyle = `rgb(${(x == 1 ? 2 : 5) *30},${(x == 1 ? 2 : 5) *30},${(x == 1 ? 2 : 5) *30}, .5)`;// temp tile coloring
 			this.ctx.fillRect(i*this.tileSize, index*this.tileSize, this.tileSize, this.tileSize);
 		}));
 
         //small one
         if (this.showMiniMap)
             this.dungeon.forEach((arr, index) => arr.forEach((x, i) => {
-                this.ctx.fillStyle = `rgb(${x*10},${x*30},${x*30}, .5)`;
+                //this.ctx.fillStyle = `rgb(${x*10},${x*30},${x*30}, .5)`; //by number
+                this.ctx.fillStyle = `rgb(${(x == 1 ? 2 : 5) *10},${(x == 1 ? 2 : 5) *30},${(x == 1 ? 2 : 5) *30}, .5)`;// temp tile coloring
                 this.ctx.fillRect(i*this.mapTileSize + this.miniMapOffset[0], index*this.mapTileSize + this.miniMapOffset[1], this.mapTileSize, this.mapTileSize);
             }));
     }
