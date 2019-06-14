@@ -36,10 +36,16 @@ export default class Game {
 	}
 
 	public render(): void {
+		this.clearScreen();
+		this.fps.update();
+		this.map.update(this.input);
+	}
+
+	public clearScreen(): void {
 		this.ctx.clearRect(0, 0, this.width, this.height);//clear old rendered content globally
-		this.fps.clearFps();
-		this.fps.calcFps();
-		this.map.displayMap();
-		this.map.colorTile(this.input);
+	}
+
+	public getInput(): void {
+
 	}
 }

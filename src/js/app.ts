@@ -17,7 +17,7 @@ class App {
 
 	private gameLoop(): void {
 		requestAnimationFrame(this.gameLoop.bind(this));
-
+		this._game.getInput();
 		this._game.render();
 	}
 }

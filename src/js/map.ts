@@ -16,7 +16,13 @@ export default class Map {
         this.mapTileSize = mapTileSize;
         this.showMiniMap = showMiniMap;
         this.miniMapOffset = miniMapOffset;
-	}
+    }
+    
+    public update(input: Input):void {
+
+		this.displayMap();
+		this.colorTile(input);
+    }
 
 	public genMap(): Map { //example map - can replace with npm lib: https://www.npmjs.com/package/random-dungeon-generator
 		this.dungeon = [
@@ -70,8 +76,13 @@ export default class Map {
     
     public colorTile(input: Input):void {
         //showing that all input can be passed now
-        if (input.KeyCodes !== undefined && input.KeyCodes.length > 0)
-            console.log(`${input.KeyCodes}`);
+        if (input.KeyCodes !== undefined && input.KeyCodes.length > 0){
+            console.log(input.KeyCodes);
+            if (input.KeyCodes.find((el)=>{ return el.key === Input.Type.SPACE && el.type === Input.KeyboardEvent.KEYUP})){
+                this.showMiniMap = !this.showMiniMap;//toggle minimap with space bar
+                console.log(input.KeyCodes, this.showMiniMap);
+            }
+        }
             
         input.KeyCodes = [];
         this.ctx.fillStyle = `rgb(200, 0, 0, .5)`;//red

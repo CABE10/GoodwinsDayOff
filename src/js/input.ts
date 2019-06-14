@@ -1,11 +1,11 @@
 export class Input {
 
-    public KeyCodes:Array<number>;
+    public KeyCodes:Array<{key:Input.Type, type:Input.KeyboardEvent}>;
     public ClickCoords:ClickCodes;
 
     constructor(){
         this.ClickCoords = new ClickCodes();
-        this.KeyCodes = new Array<number>();
+        this.KeyCodes = new Array<{key:Input.Type, type:Input.KeyboardEvent}>();
     }
 
 	public mouseInput(event: MouseEvent, that:Input){
@@ -17,29 +17,29 @@ export class Input {
 	//something to test: while event.repeat == true/false
 	public keyboardInput(event: KeyboardEvent, that:Input) {
 		// PRESS LEFT ARROW OR 'A' KEY
-		if (Input.LEFT.indexOf(event.keyCode) !== -1) {
+		if (Input.Left.indexOf(event.keyCode) !== -1) {
            console.log("[🠘] " + event.type);
-           that.KeyCodes.push(event.keyCode);
+           that.KeyCodes.push({key:Input.Type.LEFT, type:(<any>Input.KeyboardEvent)[event.type.toUpperCase()]});
 		}
 		// PRESS UP ARROW OR 'W' KEY
-		if (Input.UP.indexOf(event.keyCode) !== -1) {
+		if (Input.Up.indexOf(event.keyCode) !== -1) {
 			console.log("[🠙] " + event.type);
-            that.KeyCodes.push(event.keyCode);
+            that.KeyCodes.push({key:Input.Type.UP, type:(<any>Input.KeyboardEvent)[event.type.toUpperCase()]});
 		}
 		// PRESS RIGHT ARROW OR 'D' KEY
-		if (Input.RIGHT.indexOf(event.keyCode) !== -1) {
+		if (Input.Right.indexOf(event.keyCode) !== -1) {
 			console.log("[🠚] " + event.type);
-            that.KeyCodes.push(event.keyCode);
+            that.KeyCodes.push({key:Input.Type.RIGHT, type:(<any>Input.KeyboardEvent)[event.type.toUpperCase()]});
 		}
 		// PRESS DOWN ARROW OR 'S' KEY
-		if (Input.DOWN.indexOf(event.keyCode) !== -1) {
+		if (Input.Down.indexOf(event.keyCode) !== -1) {
 			console.log("[🠛] " + event.type);
-            that.KeyCodes.push(event.keyCode);
+            that.KeyCodes.push({key:Input.Type.DOWN, type:(<any>Input.KeyboardEvent)[event.type.toUpperCase()]});
 		}
 		// PRESS SPACE BAR
-		if (event.keyCode == Input.SPACE) {
+		if (event.keyCode == Input.Space) {
 			console.log("[_] " + event.type);
-            that.KeyCodes.push(event.keyCode);
+            that.KeyCodes.push({key:Input.Type.SPACE, type:(<any>Input.KeyboardEvent)[event.type.toUpperCase()]});
 		}
 	}
 
@@ -60,11 +60,22 @@ export class Input {
 }
 
 export namespace Input {
-    export const LEFT:Array<number>  = [37, 65];
-    export const UP:Array<number>    = [38, 87];
-    export const RIGHT:Array<number> = [39, 68];
-    export const DOWN:Array<number>  = [40, 83];
-    export const SPACE:number  = 32;
+    export const Left:Array<number>  = [37, 65];
+    export const Up:Array<number>    = [38, 87];
+    export const Right:Array<number> = [39, 68];
+    export const Down:Array<number>  = [40, 83];
+    export const Space:number  = 32;
+    export enum Type{
+        LEFT,
+        UP,
+        RIGHT,
+        DOWN,
+        SPACE
+    }
+    export enum KeyboardEvent{
+        KEYUP = "keyup",
+        KEYDOWN = "keydown"
+    }
 }
 
 export class ClickCodes{

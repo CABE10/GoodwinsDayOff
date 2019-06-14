@@ -19,6 +19,11 @@ export default class FPS {
         this.size = fontSize;
     }
 
+    public update() :void {
+		this.clearFps();
+		this.calcFps();
+    }
+
     public clearFps():void {
         this.ctx.clearRect(this.x - this.width, this.y - this.size, this.x, this.size + 10);
     }
