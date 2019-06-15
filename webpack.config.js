@@ -37,8 +37,13 @@ module.exports = {
 				use: [
 					{ loader: 'file-loader' }
 				]
+			},
+			
+			{
+				test: /\.png$/,
+				loader: "file-loader",
 			}
-		]
+		],
 	},
 	plugins: [
     new HtmlWebpackPlugin({
