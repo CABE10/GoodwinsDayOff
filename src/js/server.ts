@@ -14,10 +14,14 @@ app.get("/", (req: any, res: any) => {
   res.sendFile(path.resolve("./src/index.html"));
 });
 
-// whenever a user connects on port 3000 via
+// whenever a user connects on port 3050 via
 // a websocket, log that a user has connected
 io.on("connection", function(socket: any) {
   console.log("a user connected");
+  // whenever we receive a 'message' we log it out
+  socket.on("message", function(message: any) {
+    console.log(message);
+  });
 });
 
 const server = http.listen(3050, function() {

@@ -2,6 +2,7 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
+	node: {fs: "empty"},
 	mode: 'development',
 	entry: './src/js/app.ts',
 	output: {
