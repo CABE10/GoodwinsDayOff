@@ -1,13 +1,26 @@
+
+import * as socketio from "socket.io";
 export class Input {
 
     public KeyCodes:Array<{key:Input.Type, type:Input.KeyboardEvent}>;
-    public ClickCoords:ClickCodes;
+	public ClickCoords:ClickCodes;
+	public ServerInfo:String;
+	
+
 
     constructor(){
         this.ClickCoords = new ClickCodes();
-        this.KeyCodes = new Array<{key:Input.Type, type:Input.KeyboardEvent}>();
+		this.KeyCodes = new Array<{key:Input.Type, type:Input.KeyboardEvent}>();
+		this.ServerInfo = "10.109.138.54:3050";
+		//const socket = io("http://localhost:3050");
     }
 
+	public sendMsg(msg:String):void{
+		//socket.emit("message", "HELLO WORLD");
+
+		let socket = socketio(this.ServerInfo);
+		socket.emit("message", msg);
+	}
 	public mouseInput(event: MouseEvent, that:Input){
         that.ClickCoords.X = event !== null? event.x || 0 : 0;
         that.ClickCoords.Y = event !== null? event.y || 0 : 0;
@@ -34,7 +47,8 @@ export class Input {
 		// PRESS DOWN ARROW OR 'S' KEY
 		if (event.keyCode == 40 || event.keyCode == 83) {
 			console.log("[🠛] " + event.type);
-            that.KeyCodes.push({key:Input.Type.DOWN, type:(<any>Input.KeyboardEvent)[event.type.toUpperCase()]});
+			that.KeyCodes.push({key:Input.Type.DOWN, type:(<any>Input.KeyboardEvent)[event.type.toUpperCase()]});
+			this.sendMsg("Hello From Joshy!!!!");
 		}
 		// PRESS SPACE BAR
 		if (event.keyCode == 32) {
