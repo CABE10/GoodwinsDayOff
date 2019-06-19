@@ -40,8 +40,11 @@ module.exports = {
 			},
 			
 			{
-				test: /\.png$/,
-				loader: "file-loader",
+				test: /\.(png|jpe?g|svg)$/,
+				exclude: /node_modules/,
+				use: [
+					{ loader: 'file-loader' }
+				]
 			}
 		],
 	},
