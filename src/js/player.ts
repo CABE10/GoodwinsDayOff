@@ -37,11 +37,23 @@ export class Player {
             }
         }
 
-        this.ctx.fillRect(288, 300, 128, 128);
+        this.drawCollider(256,256);
         this.character.forEach(c => {
-            this.ctx.drawImage(c, (this.countX%13)*64, (this.countY%4)*64, 64, 64, 288, 300, 128, 128);
+            this.ctx.drawImage(c, (this.countX%13)*64, (this.countY%4)*64, 64, 64, 256, 256, 128, 128);
         });
-	}
+    }
+    
+    private drawCollider(centerX:number, centerY:number):void{
+        let radius = 32;
+  
+        this.ctx.beginPath();
+        this.ctx.arc(centerX+64, centerY+115, radius, 0, 2 * Math.PI, false);
+        //this.ctx.fillStyle = '#0000';
+        //this.ctx.fill();
+        this.ctx.lineWidth = 3;
+        this.ctx.strokeStyle = `rgb(200, 0, 0, .5)`;
+        this.ctx.stroke();
+    }
 }
 
 export namespace Player {
