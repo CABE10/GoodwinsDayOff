@@ -1,6 +1,7 @@
 import FPS from './fps';
 import Input from './input';
 import Map from './map';
+import Player from './player';
 
 export default class Game {
 	private canvas: HTMLCanvasElement;
@@ -10,7 +11,11 @@ export default class Game {
 	private fps: FPS;
 	private input: Input;
 	private map: Map;
+	private player:Player;
 	private image:HTMLImageElement;
+	private imageHead:HTMLImageElement;
+	private countX:number = 0;
+	private countY:number = 0;
 
 	// resources: 
 	// https://opengameart.org/content/platformer-sprites
@@ -37,18 +42,15 @@ export default class Game {
 		this.fps = new FPS(this.ctx, this.width - 30, 40);
 		this.input.setCursor();
 		this.map = new Map(this.ctx).genMap();
-
-		this.image = new Image();
-		this.image.src = images['rogue.png'];
-		console.log(this.image);
-		console.log(images);
+		this.player = new Player(images, this.ctx);
 	}
 
 	public render(): void {
 		this.clearScreen();
 		this.fps.update();
 		this.map.update(this.input);
-		this.ctx.drawImage(this.image, 200, 200, 512*2, 768*2);
+		this.player.draw(this.input);
+        this.input.KeyCodes = [];
 	}
 
 	public clearScreen(): void {
@@ -56,6 +58,5 @@ export default class Game {
 	}
 
 	public getInput(): void {
-
 	}
 }

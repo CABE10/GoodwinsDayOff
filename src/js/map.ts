@@ -78,12 +78,11 @@ export default class Map {
         //showing that all input can be passed now
         if (input.KeyCodes !== undefined && input.KeyCodes.length > 0){
             if (input.KeyCodes.find((el)=>{ return el.key === Input.Type.KEY_M && el.type === Input.KeyboardEvent.KEYUP})){
-                this.showMiniMap = !this.showMiniMap;//toggle minimap with space bar
+                this.showMiniMap = !this.showMiniMap;//toggle minimap with m key
                 console.log(input.KeyCodes, this.showMiniMap);
             }
         }
             
-        input.KeyCodes = [];
         this.ctx.fillStyle = `rgb(200, 0, 0, .5)`;//red
         this.ctx.fillRect(input.ClickCoords.X - input.ClickCoords.X % this.tileSize, input.ClickCoords.Y - input.ClickCoords.Y % this.tileSize, this.tileSize, this.tileSize);
         
@@ -92,5 +91,7 @@ export default class Map {
                 ((input.ClickCoords.X - input.ClickCoords.X % this.tileSize) / this.tileSize) * this.mapTileSize + this.miniMapOffset[0],
                 ((input.ClickCoords.Y - input.ClickCoords.Y % this.tileSize) / this.tileSize) * this.mapTileSize + this.miniMapOffset[1],
                  this.mapTileSize, this.mapTileSize);
+
+        
     }
 }
