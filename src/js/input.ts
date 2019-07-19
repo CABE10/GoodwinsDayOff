@@ -5,7 +5,7 @@ export class Input {
     public KeyCodes:Array<{key:Input.Type, type:Input.KeyboardEvent}>;
 	public ClickCoords:ClickCodes;
 	public ServerInfo:String;
-	
+	readonly clickOffset: number = 14;
 
 
     constructor(){
@@ -22,8 +22,8 @@ export class Input {
 		socket.emit("message", msg);
 	}
 	public mouseInput(event: MouseEvent, that:Input){
-        that.ClickCoords.X = event !== null? event.x || 0 : 0;
-        that.ClickCoords.Y = event !== null? event.y || 0 : 0;
+        that.ClickCoords.X = event !== null? event.x + this.clickOffset || 0 : 0;
+        that.ClickCoords.Y = event !== null? event.y + this.clickOffset || 0 : 0;
         console.log('x:' + event.x + ' y:' + event.y + ", " + event.type);
 	}
 
@@ -68,11 +68,11 @@ export class Input {
 		canvas.height = 30;
 		let ctx = canvas.getContext("2d");
 		ctx.fillStyle = "#000000";
-		ctx.font = "30px FontAwesome";
+		ctx.font = "30px Consolas";
 		ctx.fillStyle = "White";
 		ctx.textAlign = "center";
 		ctx.textBaseline = "middle";
-		ctx.fillText("\uf05b", 12, 12);
+		ctx.fillText("+", 12, 12);
 		let dataURL = canvas.toDataURL('image/png');
 		document.body.style.cursor = 'url(' + dataURL + '), auto';
 	}
